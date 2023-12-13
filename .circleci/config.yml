@@ -20,7 +20,7 @@ jobs:
           root: /code 
           paths:
             - .
-
+  
   apply:
     docker:
       - image: hashicorp/terraform:latest
@@ -56,6 +56,9 @@ jobs:
               -delete-comment-regex "Output from" \
               -type pr \
               -template_file /code/.circleci/plan-comment.tpl
+       -  build:
+          type: approval
+
 workflows:
   version: 2
   plan_pr:
@@ -64,10 +67,6 @@ workflows:
       - plan_comment:
           requires:
             - plan
-      - hold:
-        type: approval
-        requires:
-          - plan_comment
 
       - apply:
           requires:
