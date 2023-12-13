@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Init
           command: |-
-                echo $GCP_SA | base64 --decode >> account.json
+                echo $GCP_SA | base64 -d >> account.json
       - run:
           name: Plan
           command: printenv && terraform init && terraform plan -input=false -out=tfplan -no-color
