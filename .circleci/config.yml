@@ -9,7 +9,8 @@ jobs:
       - run:
           name: Init
           command: |-
-                export GOOGLE_CREDENTIALS=$GCP_SA
+                export GOOGLE_APPLICATION_CREDENTIALS=$GCP_SA
+                printenv
                 terraform init -input=false
       - run:
           name: Plan
