@@ -8,15 +8,16 @@ jobs:
       - checkout
       - run:
           name: Init
-          command: terraform init -input=false
+          command: |-
+                echo $GCP_SA | base64 -d >> account.json
       - run:
           name: Plan
-          command: terraform plan -input=false -out=tfplan -no-color
+          command: printenv && terraform init && terraform plan -input=false -out=tfplan -no-color
       - run:
           name: Render plan for PR comment
           command: terraform show -no-color tfplan > tfplan.txt
       - persist_to_workspace:
-          root: /code
+          root: /code 
           paths:
             - .
 
@@ -37,6 +38,10 @@ jobs:
     working_directory: /code
     steps:
       - checkout
+      - run:
+          name: setup workspace
+          command: |-
+                  export GOOGLE_CREDENTIALS=$GCP_SA
       - attach_workspace:
           at: /code
       - run:
