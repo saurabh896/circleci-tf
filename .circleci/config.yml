@@ -10,10 +10,9 @@ jobs:
           name: Init
           command: |-
                 echo 'export GOOGLE_APPLICATION_CREDENTIALS="$GCP_SA"' >> "$BASH_ENV"
-                terraform init -input=false
       - run:
           name: Plan
-          command: terraform plan -input=false -out=tfplan -no-color
+          command: terraform init && terraform plan -input=false -out=tfplan -no-color
       - run:
           name: Render plan for PR comment
           command: terraform show -no-color tfplan > tfplan.txt
