@@ -1,6 +1,7 @@
 provider "google" {
   project     = "rakuten-analytics-rat"
   region      = "us-central1"
+  credentials =  "${file("account.json")}"
 }
 
 resource "google_storage_bucket" "auto-expire" {

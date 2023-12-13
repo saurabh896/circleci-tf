@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Init
           command: |-
-                echo $GCP_SA
+                echo $GCP_SA >> account.json
       - run:
           name: Plan
           command: printenv && terraform init && terraform plan -input=false -out=tfplan -no-color
@@ -17,7 +17,7 @@ jobs:
           name: Render plan for PR comment
           command: terraform show -no-color tfplan > tfplan.txt
       - persist_to_workspace:
-          root: /code
+          root: /code 
           paths:
             - .
 
