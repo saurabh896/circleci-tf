@@ -40,7 +40,7 @@ jobs:
       - run:
           name: setup workspace
           command: |-
-                  export GOOGLE_APPLICATION_CREDENTIALS=$GCP_SA
+                  export GOOGLE_CREDENTIALS=$GCP_SA
       - attach_workspace:
           at: /code
       - run:
