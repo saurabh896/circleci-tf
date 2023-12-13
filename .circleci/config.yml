@@ -64,6 +64,11 @@ workflows:
       - plan_comment:
           requires:
             - plan
+      - hold:
+        type: approval
+        requires:
+          - plan_comment
+
       - apply:
           requires:
             - plan
