@@ -8,7 +8,9 @@ jobs:
       - checkout
       - run:
           name: Init
-          command: terraform init -input=false
+          command: |-
+                export GOOGLE_CREDENTIALS=$GCP_SA
+                terraform init -input=false
       - run:
           name: Plan
           command: terraform plan -input=false -out=tfplan -no-color
