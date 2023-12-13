@@ -56,9 +56,7 @@ jobs:
               -delete-comment-regex "Output from" \
               -type pr \
               -template_file /code/.circleci/plan-comment.tpl
-       -  build:
-          type: approval
-
+      
 workflows:
   version: 2
   plan_pr:
