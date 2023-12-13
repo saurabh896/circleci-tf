@@ -9,8 +9,7 @@ jobs:
       - run:
           name: Init
           command: |-
-                export GOOGLE_APPLICATION_CREDENTIALS=$GCP_SA
-                printenv
+                echo 'export GOOGLE_APPLICATION_CREDENTIALS="$GCP_SA"' >> "$BASH_ENV"
                 terraform init -input=false
       - run:
           name: Plan
